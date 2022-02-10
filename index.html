@@ -13,36 +13,29 @@
     <link rel="icon" href="conteudo/logo-uol-icon.png">
 </head>
 <body>
+    <aside class="tela-login">
+        <img src="conteudo/logo-uol.svg" alt="">
+        <input class="caixa-login" type="text" placeholder="Digite seu nome">
+        <div class="botao-entrar" onclick="liberarSite()">
+            <p>Entrar</p>
+        </div>
+    </aside>
     <header>
         <div class="icones-header">
             <img class="logo-header" src="conteudo/logo-uol.svg" alt="">
             <img class="icone__pessoas-header" src="conteudo/icone-pessoas.svg" alt="">
         </div>
     </header>
-    <main>
-        <div class="chat mensagem__chat-entrousaiu">
-            <p><span>(09:21:45)</span> <strong>João</strong> entra na sala...</p>
-        </div>
-        <div class="chat mensagem__chat">
-            <p><span>(09:21:45)</span> <strong>João</strong> para <strong>Todos:</strong> Bom dia</p>
-        </div>
-        <div class="chat mensagem__chat">
-            <p><span>(09:21:45)</span> <strong>Maria</strong> para <strong>João:</strong> Oi João :)</p>
-        </div>
-        <div class="chat mensagem__chat-reservada">
-            <p><span>(09:21:45)</span> <strong>João</strong> reservadamente para <strong>Maria:</strong> Oi gatinha quer tc?</p>
-        </div>
-        <div class="chat mensagem__chat-entrousaiu">
-            <p><span>(09:21:45)</span> <strong>Maria</strong> sai da sala...</p>
-        </div>
-
+    <main class="janela-chat">
     </main>
     <footer>
         <div class="icones-footer">
+            <!-- <textarea> no lugar de input -->
             <input class="caixa-mensagem" type="text" placeholder="Escreva aqui...">
             <img class="icone__enviar-footer" src="conteudo/botao-enviar.svg" alt="">
         </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
