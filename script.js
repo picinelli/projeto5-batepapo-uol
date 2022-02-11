@@ -1,4 +1,7 @@
 let nomeUsuario = ''
+let objeto = {
+    name: nomeUsuario,
+}
 
 // Funcao que fara um request tipo get para pegar as mensagens do chat.
 function buscarMensagens() {
@@ -49,21 +52,23 @@ function carregarMensagensNormais(resposta, chat, i) {
 
 // Funcao que irá criar uma div com as características de mensagens reservadas.
 function carregarMensagensReservadas(resposta, chat, i) {
-    chat.innerHTML += `
-    <div class="chat mensagem__chat-reservada">
-    <p><span>${resposta.data[i].time}</span> <strong>${resposta.data[i].from}</strong> reservadamente para <strong>${resposta.data[i].to}</strong> ${resposta.data[i].text}</p>
-</div>
-    `
-    chat.scrollTop = chat.scrollHeight;
-    //chat.scrollIntoView()
+    // if para verificar se o Usuario é remetente ou destinatário
+    // ATENCAO, ESSE IF NAO FOI TESTADO AINDA!
+    if (resposta.data[i].from === nomeUsuario || resposta.data[i].to === nomeUsuario) {
+        chat.innerHTML += `
+        <div class="chat mensagem__chat-reservada">
+            <p><span>${resposta.data[i].time}</span> <strong>${resposta.data[i].from}</strong> reservadamente para <strong>${resposta.data[i].to}</strong> ${resposta.data[i].text}</p>
+        </div>
+        `
+        chat.scrollTop = chat.scrollHeight;
+        //chat.scrollIntoView()
+    }
 }
 
 // Funcao que fara um request tipo post para verificar se já existe o nome escolhido.
 function liberarSite() {
     nomeUsuario = document.querySelector('.caixa-login').value
-    let objeto = {
-        name: nomeUsuario,
-    }
+    objeto.name = nomeUsuario;
     const promessaNomes = axios.post('https://mock-api.driven.com.br/api/v4/uol/participants', objeto);
     promessaNomes.then(verificarNomesCorreto)
     promessaNomes.catch(verificarNomesErro)
@@ -71,8 +76,15 @@ function liberarSite() {
 
 // Funcao para liberar o acesso ao site, caso o nome escolhido seja válido.
 function verificarNomesCorreto(resposta, nomeUsuario) {
-    let telaLogin = document.querySelector('.tela-login');
-    telaLogin.classList.add('escondido');
+    if (nomeUsuario !== '') {
+        let telaLogin = document.querySelector('.tela-login');
+        telaLogin.classList.add('escondido');
+        setInterval(manterConexaoUsuario, 5000);
+    }
+}
+
+function manterConexaoUsuario() {
+    const promessaStatus = axios.post('https://mock-api.driven.com.br/api/v4/uol/status', objeto);
 }
 
 // Funcao para não liberar o acesso ao site, caso o nome escolhido seja inválido.
