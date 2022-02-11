@@ -14,7 +14,6 @@ setInterval(buscarMensagens, 3000)
 
 // Funcao que ira iterar por cada objeto e verificar de qual tipo é (status, normal ou reservada).
 function carregarMensagens(resposta) {
-    //console.log(resposta.data)
     let chat = document.querySelector('.janela-chat')
     chat.innerHTML = ''
     for(let i = 0; i < resposta.data.length; i++) {
@@ -31,7 +30,7 @@ function carregarMensagens(resposta) {
 // Funcao que irá criar uma div com as características de status.
 function carregarMensagensStatus(resposta, chat, i) {
     chat.innerHTML += `
-    <div class="chat mensagem__chat-entrousaiu">
+    <div class="chat mensagem__chat-entrousaiu" data-identifier="message">
         <p><span>${resposta.data[i].time}</span> <strong>${resposta.data[i].from}</strong> ${resposta.data[i].text}</p>
     </div>
     `
@@ -42,7 +41,7 @@ function carregarMensagensStatus(resposta, chat, i) {
 // Funcao que irá criar uma div com as características de mensagens normais.
 function carregarMensagensNormais(resposta, chat, i) {
     chat.innerHTML += `
-    <div class="chat mensagem__chat">
+    <div class="chat mensagem__chat" data-identifier="message">
         <p><span>${resposta.data[i].time}</span> <strong>${resposta.data[i].from}</strong> para <strong>${resposta.data[i].to}</strong> ${resposta.data[i].text}</p>
     </div>
     `
@@ -56,7 +55,7 @@ function carregarMensagensReservadas(resposta, chat, i) {
     // ATENCAO, ESSE IF NAO FOI TESTADO AINDA!
     if (resposta.data[i].from === nomeUsuario || resposta.data[i].to === nomeUsuario) {
         chat.innerHTML += `
-        <div class="chat mensagem__chat-reservada">
+        <div class="chat mensagem__chat-reservada" data-identifier="message">
             <p><span>${resposta.data[i].time}</span> <strong>${resposta.data[i].from}</strong> reservadamente para <strong>${resposta.data[i].to}</strong> ${resposta.data[i].text}</p>
         </div>
         `
@@ -83,6 +82,7 @@ function verificarNomesCorreto(resposta, nomeUsuario) {
     }
 }
 
+// Funcao para enviar ao servidor informação(objeto - nomeUsuario) para manter conexão.
 function manterConexaoUsuario() {
     const promessaStatus = axios.post('https://mock-api.driven.com.br/api/v4/uol/status', objeto);
 }
@@ -91,5 +91,19 @@ function manterConexaoUsuario() {
 function verificarNomesErro(resposta) {
     console.log(resposta);
     alert(`Erro! Usuário  já existe. Por favor, escolha outro nome!`);
+}
+
+// Função para enviar a mensagem ao chat.
+function enviarMensagem() {
+    let mensagem = document.querySelector('.caixa-mensagem').value;
+    let objetoMensagem = {
+        from: nomeUsuario,
+        to: "Todos", // ou outro para bonus
+        text: mensagem,
+        type: "message" // ou "private_message" para o bônus
+    }
+    const enviarMensagemServidor = axios.post('https://mock-api.driven.com.br/api/v4/uol/messages', objetoMensagem);
+    enviarMensagemServidor.catch(window.location.reload);
+    mensagem = '';
 }
 

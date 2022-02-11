@@ -16,8 +16,8 @@
     <!-- Tela de login -->
     <aside class="tela-login">
         <img src="conteudo/logo-uol.svg" alt="">
-        <input class="caixa-login" type="text" placeholder="Digite seu nome">
-        <div class="botao-entrar" onclick="liberarSite()">
+        <input class="caixa-login" type="text" placeholder="Digite seu nome" data-identifier="enter-name">
+        <div class="botao-entrar" onclick="liberarSite()" data-identifier="start">
             <p>Entrar</p>
         </div>
     </aside>
@@ -36,7 +36,7 @@
         <div class="icones-footer">
             <!-- <textarea> no lugar de input -->
             <input class="caixa-mensagem" type="text" placeholder="Escreva aqui...">
-            <img class="icone__enviar-footer" src="conteudo/botao-enviar.svg" alt="">
+            <img class="icone__enviar-footer" src="conteudo/botao-enviar.svg" alt="" onclick="enviarMensagem()" data-identifier="send-message">
         </div>
     </footer>
     <!-- API -->
