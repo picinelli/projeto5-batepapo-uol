@@ -1,4 +1,6 @@
 let nomeUsuario = ''
+let destinatário = ''
+let tipoMensagem = ''
 let objeto = {
     name: nomeUsuario,
 }
@@ -11,9 +13,6 @@ function buscarMensagens() {
     const promessa = axios.get('https://mock-api.driven.com.br/api/v4/uol/messages')
     promessa.then(carregarMensagens)
 }
-
-// Executar a funcao acima a cada 3s para atualizar o chat.
-setInterval(buscarMensagens, 3000)
 
 // Funcao que ira iterar por cada objeto e verificar de qual tipo é (status, normal ou reservada).
 function carregarMensagens(resposta) {
@@ -74,6 +73,7 @@ function liberarSite() {
     const promessaNomes = axios.post('https://mock-api.driven.com.br/api/v4/uol/participants', objeto);
     promessaNomes.then(verificarNomesCorreto)
     promessaNomes.catch(verificarNomesErro)
+    buscarParticipantes()
 }
 
 // Funcao para liberar o acesso ao site, caso o nome escolhido seja válido.
@@ -101,9 +101,9 @@ function enviarMensagem() {
     let mensagemValor = document.querySelector('.caixa-mensagem').value;
     let objetoMensagem = {
         from: nomeUsuario,
-        to: "Todos", // ou outro para bonus
+        to: destinatário,
         text: mensagemValor,
-        type: "message" // ou "private_message" para o bônus
+        type: tipoMensagem // ou "private_message" para o bônus
     }
     const enviarMensagemServidor = axios.post('https://mock-api.driven.com.br/api/v4/uol/messages', objetoMensagem);
     enviarMensagemServidor.catch(window.location.reload);
@@ -120,12 +120,94 @@ function enviarComEnter(evento) {
     }
 };
 
+// Funcao para fazer uma requisicao tipo GET, solicitando os participantes.
+function buscarParticipantes() {
+    const promessaParticipantes = axios.get('https://mock-api.driven.com.br/api/v4/uol/participants')
+    promessaParticipantes.then(criarParticipantes)
+}
+
+// Funcao que cria as divs com os participantes, com as informacoes da funcao acima
+function criarParticipantes(promessa) {
+    let participante = document.querySelector('.participantes')
+    participante.innerHTML = `
+    <div class="caixa-opcoes" onclick="selecionarDestinatario(this)">
+        <div class="opcoes-selecionar">
+            <img src="conteudo/icone-pessoas.svg" alt="icone-pessoas">
+            <p class="nome">Todos</p>
+        </div>
+        <img src="conteudo/icone-marcado.svg" class="escondido" alt="icone-marcado">
+    </div>
+    `
+    for(let i = 0; i < promessa.data.length; i++) {
+        if (promessa.data[i].name !== nomeUsuario) {
+            participante.innerHTML += `
+            <div class="caixa-opcoes" onclick="selecionarDestinatario(this)" data-identifier="participant">
+                <div class="opcoes-selecionar">
+                    <img src="conteudo/icone-pessoa.svg" alt="icone-pessoa">
+                    <p class="nome">${promessa.data[i].name}</p>
+                </div>
+                <img src="conteudo/icone-marcado.svg" class="escondido" alt="icone-marcado">
+            </div>
+            `
+        }
+    }
+}
+
+// Funcao para mostrar a div com os participantes.
 function mostrarParticipantes() {
     listaParticipantes.classList.remove('escondido')
     areaOpaca.classList.add('opacidade')
 }
 
+// Funcao para esconder a div com os participantes.
 function esconderParticipantes() {
     listaParticipantes.classList.add('escondido')
     areaOpaca.classList.remove('opacidade')
 }
+
+// Funcao para escolher o destinatario
+function selecionarDestinatario(elemento) {
+    destinatário = elemento.querySelector('.nome').innerHTML;
+    let participantes = document.querySelector('.participantes')
+    let pessoaSelecionada = document.querySelector('.pessoa-selecionada');
+    if (pessoaSelecionada === null) {
+        elemento.querySelector('img:nth-child(2)').classList.remove('escondido')
+        elemento.querySelector('img:nth-child(2)').classList.add('pessoa-selecionada')
+    } else {
+        let pessoaSelecionada = document.querySelector('.pessoa-selecionada');
+        pessoaSelecionada.classList.add('escondido')
+        pessoaSelecionada.classList.remove('pessoa-selecionada')
+        elemento.querySelector('img:nth-child(2)').classList.remove('escondido')
+        elemento.querySelector('img:nth-child(2)').classList.add('pessoa-selecionada')
+    }
+}
+
+// Funcao para escolher a visibilidade
+function selecionarVisibilidade(elemento) {
+    let visibilidade = document.querySelector('.visibilidade')
+    let visibilidadeSelecionada = document.querySelector('.visibilidade-selecionada');
+    if (visibilidadeSelecionada === null) {
+        elemento.querySelector('img:nth-child(2)').classList.remove('escondido')
+        elemento.querySelector('img:nth-child(2)').classList.add('visibilidade-selecionada')
+    } else {
+        let visibilidadeSelecionada = document.querySelector('.visibilidade-selecionada');
+        visibilidadeSelecionada.classList.add('escondido')
+        visibilidadeSelecionada.classList.remove('visibilidade-selecionada')
+        elemento.querySelector('img:nth-child(2)').classList.remove('escondido')
+        elemento.querySelector('img:nth-child(2)').classList.add('visibilidade-selecionada')
+    }
+
+    if (elemento.querySelector('p').innerHTML === 'Público') {
+        tipoMensagem = "message";
+    } else {
+        tipoMensagem = "private_message"
+    }
+}
+
+
+
+// Executar a funcao abaixo a cada 3s para atualizar o chat.
+setInterval(buscarMensagens, 3000)
+
+// Executar a funcao abaixo a cada 10s para atualizar os participantes.
+setInterval(buscarParticipantes, 10000)

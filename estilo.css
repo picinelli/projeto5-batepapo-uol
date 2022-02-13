@@ -193,6 +193,11 @@ input {
     justify-content: space-between;
 }
 
+.caixa-visibilidade {
+    display: flex;
+    justify-content: space-between;
+}
+
 .caixa-opcoes > img {
     margin-right: 25px;
 }
@@ -229,4 +234,9 @@ input {
     z-index: 4;
     width: 100vw;
     height: 100vh;
+}
+
+.participantes {
+    height: 250px;
+    overflow: auto;
 }
