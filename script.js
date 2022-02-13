@@ -2,6 +2,7 @@ let nomeUsuario = ''
 let objeto = {
     name: nomeUsuario,
 }
+let mensagem = document.querySelector('.caixa-mensagem');
 
 // Funcao que fara um request tipo get para pegar as mensagens do chat.
 function buscarMensagens() {
@@ -95,15 +96,25 @@ function verificarNomesErro(resposta) {
 
 // Função para enviar a mensagem ao chat.
 function enviarMensagem() {
-    let mensagem = document.querySelector('.caixa-mensagem').value;
+    let mensagemValor = document.querySelector('.caixa-mensagem').value;
     let objetoMensagem = {
         from: nomeUsuario,
         to: "Todos", // ou outro para bonus
-        text: mensagem,
+        text: mensagemValor,
         type: "message" // ou "private_message" para o bônus
     }
     const enviarMensagemServidor = axios.post('https://mock-api.driven.com.br/api/v4/uol/messages', objetoMensagem);
     enviarMensagemServidor.catch(window.location.reload);
-    mensagem = '';
+    if (mensagemValor !== '') {
+        mensagemValor = '';
+    }
 }
+
+// Enviar mensagem com enter.
+mensagem.addEventListener("keyup", enviarComEnter)
+function enviarComEnter(evento) {
+    if (evento.keyCode === 13) {
+        document.querySelector(".icone__enviar-footer").click();
+    }
+};
 
