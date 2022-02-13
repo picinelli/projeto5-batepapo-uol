@@ -3,6 +3,8 @@ let objeto = {
     name: nomeUsuario,
 }
 let mensagem = document.querySelector('.caixa-mensagem');
+let areaOpaca = document.querySelector('.area-opaca');
+let listaParticipantes = document.querySelector('.lista-participantes');
 
 // Funcao que fara um request tipo get para pegar as mensagens do chat.
 function buscarMensagens() {
@@ -118,3 +120,12 @@ function enviarComEnter(evento) {
     }
 };
 
+function mostrarParticipantes() {
+    listaParticipantes.classList.remove('escondido')
+    areaOpaca.classList.add('opacidade')
+}
+
+function esconderParticipantes() {
+    listaParticipantes.classList.add('escondido')
+    areaOpaca.classList.remove('opacidade')
+}
