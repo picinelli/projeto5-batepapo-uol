@@ -191,6 +191,7 @@ input {
 .caixa-opcoes {
     display: flex;
     justify-content: space-between;
+    overflow-x: hidden;
 }
 
 .caixa-visibilidade {
