@@ -1,6 +1,6 @@
 let nomeUsuario = ''
-let destinatário = ''
-let tipoMensagem = ''
+let destinatário = 'Todos'
+let tipoMensagem = 'message'
 let objeto = {
     name: nomeUsuario,
 }
@@ -106,6 +106,7 @@ function enviarMensagem() {
         type: tipoMensagem // ou "private_message" para o bônus
     }
     const enviarMensagemServidor = axios.post('https://mock-api.driven.com.br/api/v4/uol/messages', objetoMensagem);
+    enviarMensagemServidor.then(buscarMensagens);
     enviarMensagemServidor.catch(window.location.reload);
     if (mensagemValor !== '') {
         mensagemValor = '';
