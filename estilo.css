@@ -198,6 +198,10 @@ input {
     justify-content: space-between;
 }
 
+.caixa-visibilidade > img {
+    margin-right: 25px;
+}
+
 .caixa-opcoes > img {
     margin-right: 25px;
 }
