@@ -23,9 +23,6 @@
     - [x]  **A cada requisito implementado** faça um *commit* com uma mensagem descritiva do que você evoluiu
 - Layout
     - [x]  Aplicar layout para mobile, seguindo Figma abaixo. Não é necessário implementar uma versão para desktop.
-    
-    [Layout](https://www.figma.com/file/eviXSw3MnQVphvpalRT78c/Chat-UOL?node-id=0%3A1)
-    
 - Chat
     - [x]  Ao entrar no site, este deve carregar as mensagens do servidor e exibi-las conforme layout fornecido
     - [x]  Existem 3 tipos de mensagem:
