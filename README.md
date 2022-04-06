@@ -46,7 +46,7 @@
     - [x]  Nesse envio, deve ser informado o remetente, o destinatário e se a mensagem é reservada ou não.
         - Escolher um destinário e se a mensagem é reservada ou pública é um **requisito bônus** (ver abaixo). Logo, se você não implementar o bônus, sempre envie destinatário como **Todos** e a mensagem como **pública**.
 
-# Bônus (opcional)
+## Bônus (opcional)
 
 - Participantes ativos
     - [x]  Ao clicar no ícone superior direito de participantes, o menu lateral deve abrir por cima do chat conforme layout. Um fundo escuro semi-transparente deve ficar por cima do chat.
