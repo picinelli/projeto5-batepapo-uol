@@ -15,6 +15,9 @@
 
 <!-- ABOUT THE PROJECT -->
 
+![Banner](https://github.com/picinelli/projeto-batepapo-uol/blob/main/conteudo/banner.png)
+
+
 ## Requisitos
 
 - Geral
