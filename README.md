@@ -15,7 +15,7 @@
 
 <!-- ABOUT THE PROJECT -->
 
-![Banner]<img src="https://github.com/picinelli/projeto-batepapo-uol/blob/main/conteudo/banner.png" alt="Logo" width="1230" height="615">
+<img src="https://github.com/picinelli/projeto-batepapo-uol/blob/main/conteudo/banner.png" alt="Logo" width="1230" height="767">
 
 
 ## Requisitos
