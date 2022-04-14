@@ -10,7 +10,7 @@
   <p align="center">
     Projeto de um bate-papo totalmente funcional com uso de API!
     <br />
-    <a href="https://github.com/picinelli/projeto-cineflix/tree/main/src"><strong>JSX code»</strong></a>
+    <a href="https://github.com/picinelli/projeto-cineflix/tree/main/src"><strong>Código JSX»</strong></a>
 </div>
 
 <!-- ABOUT THE PROJECT -->
