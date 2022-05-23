@@ -18,51 +18,33 @@
 ![Banner](https://github.com/picinelli/projeto-batepapo-uol/blob/main/conteudo/banner.png)
 
 
-## Requisitos
+# Requisitos
 
 - Geral
-    - [x]  Não utilize nenhuma biblioteca para implementar este projeto (jquery, lodash, react, etc), nem outras linguagens que compilem para JS (TypeScript, Clojure, ELM, etc), somente JavaScript puro
-    - [x]  Seu projeto deverá ser desenvolvido utilizando Git e GitHub, em um repositório público
-    - [x]  **A cada requisito implementado** faça um *commit* com uma mensagem descritiva do que você evoluiu
+    - [x]  Não utilize nenhuma biblioteca para implementar este projeto (jQuery, lodash, react, etc), nem outras linguagens que compilem para JS (TypeScript, ELM, etc), somente JavaScript puro.
+    - [x]  Seu projeto deverá ser desenvolvido utilizando Git e GitHub, em um repositório público.
+    - [x]  **A cada requisito implementado** faça um *commit* com uma mensagem descritiva do que você evoluiu.
 - Layout
-    - [x]  Aplicar layout para mobile, seguindo Figma abaixo. Não é necessário implementar uma versão para desktop.
-- Chat
-    - [x]  Ao entrar no site, este deve carregar as mensagens do servidor e exibi-las conforme layout fornecido
-    - [x]  Existem 3 tipos de mensagem:
-        - Mensagens de status (**Entrou** ou **Saiu** da sala): deve ter o fundo cinza
-        - Mensagens reservadas (**Reservadamente**): deve ter o fundo rosa
-        - Mensagens normais: devem ter o fundo branco
-    - [x]  A cada 3 segundos o site deve recarregar as mensagens do servidor para manter sempre atualizado
-    - [x]  O chat deverá ter rolagem automática por padrão, ou seja, sempre que novas mensagens forem adicionadas ao final do chat ele deve scrollar para o final  
-    - [x]  As mensagens com **Reservadamente** só devem ser exibidas se o nome do destinatário for igual ao nome do usuário que está usando o chat (ou senão ele poderia ver as mensagens reservadas para outras pessoas)
-    
-- Entrada na sala
-    - [x]  Ao entrar no site, o usuário deverá ser perguntado com um `prompt` seu lindo nome
-    - [x]  Após inserção do nome, este deve ser enviado para o servidor pra cadastrar o usuário
-        - Caso o servidor responda com sucesso, o usuário poderá entrar na sala
-        - Caso o servidor responda com erro, deve-se pedir para o usuário digitar outro nome, pois este já está em uso
-    - [x]  Enquanto o usuário estiver na sala, a cada 5 segundos o site deve avisar ao servidor que o usuário ainda está presente, ou senão será considerado que "Saiu da sala"
-- Envio de mensagem
-    - [x]  Ao enviar uma mensagem, esta deve ser enviada para o servidor
-        - Caso o servidor responda com sucesso, você deve obter novamente as mensagens do servidor e atualizar o chat
-        - Caso o servidor responda com erro, significa que esse usuário não está mais na sala e a página deve ser atualizada (e com isso voltando pra etapa de pedir o nome)
-    - [x]  Nesse envio, deve ser informado o remetente, o destinatário e se a mensagem é reservada ou não.
-        - Escolher um destinário e se a mensagem é reservada ou pública é um **requisito bônus** (ver abaixo). Logo, se você não implementar o bônus, sempre envie destinatário como **Todos** e a mensagem como **pública**.
-
-## Bônus (opcional)
-
-- Participantes ativos
-    - [x]  Ao clicar no ícone superior direito de participantes, o menu lateral deve abrir por cima do chat conforme layout. Um fundo escuro semi-transparente deve ficar por cima do chat.
-    - [x]  Ao clicar no fundo escuro, o menu lateral deve ser ocultado novamente
-    - [x]  O site deve obter a lista de participantes assim que entra no chat e deve atualizar a lista a cada 10 segundos
-    - [x]  Ao clicar em uma pessoa ou em público/reservadamente, a opção clicada deve ser marcada com um check e as demais desmarcadas
-    - [x]  Além do check acima, ao trocar esses parâmetros também deve ser alterada a frase que informa o destinatário, que fica embaixo do input de mensagem
+    - [x]  Aplicar layout para desktop e mobile, seguindo o figma oferecido.
+- Distribuição de cartas
+    - [x]  Ao entrar no jogo, o usuário deverá ser perguntado com quantas cartas quer jogar (utilize `prompt`)
+    - [x]  O usuário só poderá inserir números pares no `prompt`, de 4 a 14. Qualquer número que fuja a essa regra não deve ser aceito. No caso de números inválidos, o `prompt` deverá ficar sendo repetido, até que o usuário coloque um número válido.
+    - [x]  Após inserir um número de cartas válido, o jogo deverá inserir as cartas viradas pra baixo na página de forma que a distribuição seja aleatória
         
-- Tela de entrada
-    - [x]  Em vez de um prompt, faça uma tela inicial.
+- Clique na carta
+    - [x]  Ao clicar em uma carta, a mesma deve ser virada
+    - [x]  Caso seja a primeira carta do par, ela deve permanecer virada até o usuário escolher a segunda carta
+    - [x]  Caso seja a segunda carta virada, existem 2 situações:
+        - [x]  Caso seja igual à primeira carta, o usuário acertou e ambas agora devem ficar viradas pra cima até o final do jogo
+        - [x]  Caso seja uma carta diferente da primeira carta virada, o usuário errou. Nesse caso, o jogo deve **aguardar 1 segundo** e então virar as duas cartas para baixo novamente
 
-- Envio com enter
-    - [x]  Faça com que, caso o usuário tecle Enter no campo de mensagem, ela seja enviada (ou seja, deve ter o mesmo comportamento caso o usuário clique no botão de envio)
+- Fim do Jogo
+    - [x]  Quando o usuário terminar de virar todas as cartas corretamente, deverá ser exibido um `alert` com a mensagem **"Você ganhou em X jogadas!"** sendo X a quantidade de vezes que o usuário virou uma carta no jogo.
+
+# Bônus (opcional)
+
+- [x]  Coloque um relógio no topo superior direito da tela, contando quantos segundos já passaram desde o início do jogo. Ao final, informe na mensagem de vitória a quantidade de segundos.
+- [x]  Ao final do jogo, pergunte com um `prompt` se o usuário gostaria de reiniciar a partida. Se ele responder sim, comece novamente o jogo perguntando a quantidade de cartas.
 
 ### Tecnologias Utilizadas
 
