@@ -64,8 +64,7 @@
 - Tela de entrada
     - [x]  Em vez de um prompt, faça uma tela inicial, seguindo o layout abaixo
         - Layout
-            
-            ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c9f1d322-f267-4b3a-8a25-b3c67eebae9e/iPhone_8_-_3.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c9f1d322-f267-4b3a-8a25-b3c67eebae9e/iPhone_8_-_3.png)
+             <img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c9f1d322-f267-4b3a-8a25-b3c67eebae9e/iPhone_8_-_3.png" alt="Logo">
 
 
 ### Tecnologias Utilizadas
